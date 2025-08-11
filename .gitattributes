@@ -1,0 +1,45 @@
+# ============================
+# Unity-specific .gitattributes
+# ============================
+
+# Asegura LF en todo el proyecto
+* text=auto eol=lf
+
+# Código C# y scripts de Unity
+*.cs text eol=lf
+*.shader text eol=lf
+*.compute text eol=lf
+*.cginc text eol=lf
+*.hlsl text eol=lf
+
+# Archivos Unity YAML
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+*.anim text eol=lf
+*.controller text eol=lf
+
+# JSON y XML
+*.json text eol=lf
+*.xml text eol=lf
+
+# Archivos de texto
+*.md text eol=lf
+*.txt text eol=lf
+
+# Binarios (sin conversión)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.gif binary
+*.psd binary
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.fbx binary
+*.blend binary
+
+# Evitar conversión de saltos de línea en la carpeta problemática
+Bloxorz/Library/PackageCache/** -text
