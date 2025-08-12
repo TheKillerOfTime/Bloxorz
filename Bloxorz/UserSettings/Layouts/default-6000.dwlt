@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 332}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 104
+  controlID: 92
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -300,8 +300,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 245.8
-    y: 24
+    x: 244.8
+    y: 79.200005
     width: 1050.7999
     height: 460.4
   m_SerializedDataModeController:
@@ -760,9 +760,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 977.032, y: 453.80344, z: -402.38074}
+    m_Target: {x: -4.614125, y: -7.353692, z: 5.5764546}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: -4.614125, y: -7.353692, z: 5.5764546}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -808,13 +808,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.00029585624, y: 0.99397403, z: -0.10958886, w: -0.0026824402}
+    m_Target: {x: 0.36962965, y: -0.0030700557, z: 0.0012223695, w: 0.9291806}
     speed: 2
-    m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Value: {x: 0.36962542, y: -0.0041850246, z: 0.001665906, w: 0.92916995}
   m_Size:
-    m_Target: 1132.5042
+    m_Target: 10.898019
     speed: 2
-    m_Value: 10
+    m_Value: 10.428726
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79.200005
     width: 243.8
     height: 460.4
   m_SerializedDataModeController:
@@ -889,7 +889,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 285effff
+      m_ExpandedIDs: 52a4ffff1ec7ffff3af0ffffbcf3ffffbef8ffff9aaa0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 510.4
+    y: 565.60004
     width: 1296.6
     height: 204.4
   m_SerializedDataModeController:
@@ -1062,7 +1062,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Resources/Modelos
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1072,16 +1072,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Resources/Modelos
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\soler\OneDrive\Desktop\Seminario\Bloxorz\Bloxorz
+  m_LastProjectPath: E:\Cosas Importantes\Universidad\Seminario\Bloxorz\Bloxorz\Bloxorz
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 64.400024}
-    m_SelectedIDs: 6ae20000
-    m_LastClickedID: 57962
-    m_ExpandedIDs: 000000009ea80000
+    m_SelectedIDs: faac0000
+    m_LastClickedID: 44282
+    m_ExpandedIDs: 000000009ea80000c6a9000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1191,7 +1191,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 565.60004
-    width: 1295.8
+    width: 1296.6
     height: 204.4
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1225,8 +1225,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1298.6
-    y: 24
+    x: 1297.6
+    y: 79.200005
     width: 237.40002
     height: 690.8
   m_SerializedDataModeController:
