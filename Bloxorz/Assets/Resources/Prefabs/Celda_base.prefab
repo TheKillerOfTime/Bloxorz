@@ -62,7 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b03582c1127e69948a6cc1e54f3ba496, type: 3}
       propertyPath: m_Name
-      value: Celda_base 1
+      value: Celda_base
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b03582c1127e69948a6cc1e54f3ba496, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b03582c1127e69948a6cc1e54f3ba496, type: 3}
+      propertyPath: m_TagString
+      value: Celda
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
