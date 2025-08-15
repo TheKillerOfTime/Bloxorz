@@ -3573,7 +3573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1240590477174749982, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1240590477174749982, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3581,11 +3581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1240590477174749982, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1240590477174749982, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 1240590477174749982, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3598,6 +3598,10 @@ PrefabInstance:
     - target: {fileID: 1908583805200621988, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: m_Name
       value: Player_Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365116887063028540, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
+      propertyPath: duracionRotacionPlayer
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2365116887063028540, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: 'puntosDeRotacion.Array.data[8]'
