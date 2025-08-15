@@ -3601,7 +3601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2365116887063028540, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: duracionRotacionPlayer
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2365116887063028540, guid: a12608a435cb2dc4a9576f40d2447be8, type: 3}
       propertyPath: 'puntosDeRotacion.Array.data[8]'

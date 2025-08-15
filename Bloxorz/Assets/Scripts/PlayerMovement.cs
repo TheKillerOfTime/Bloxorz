@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour{
     [Header("Logica de la rotacion")]
@@ -10,6 +11,10 @@ public class PlayerMovement : MonoBehaviour{
     private static readonly float[] angleHorizontal = { 0f, 90f, 0f };
     private bool isHorizontal=false; //true: esta acostado  pero en vertical
     //Si esta vertical cambia la X, si esta en horizontal la Z ---- EJ vertical: (0, 0.5, -1.5),,, EJ horizontal (0.5, 0.5,0)
+    [Header("Logica de la secuencia de movimientos")]
+    private Queue<string> colaMovimientos = new Queue<string>();
+    private bool netxMove=true;
+    private string move;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -18,11 +23,30 @@ public class PlayerMovement : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        controlarRotacionPlayer();
+        detectorDeMovimientos();
+        if(colaMovimientos.Count>0){
+            if(netxMove){
+                controlarRotacionPlayer();
+            }
+        }
+    }
+
+    private void detectorDeMovimientos(){
+        if(Input.GetKeyDown(KeyCode.W)){
+            colaMovimientos.Enqueue("W");
+        }else if(Input.GetKeyDown(KeyCode.S)){
+            colaMovimientos.Enqueue("S");
+        }else if(Input.GetKeyDown(KeyCode.D)){
+            colaMovimientos.Enqueue("D");
+        }else if(Input.GetKeyDown(KeyCode.A)){
+            colaMovimientos.Enqueue("A");
+        }
     }
 
     private void controlarRotacionPlayer(){
-        if(Input.GetKeyDown(KeyCode.W)){
+        netxMove=false;
+        move = colaMovimientos.Dequeue();
+        if(move=="W"){
             if(isParado){
                 StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,1f,-0.5f), Vector3.right, 90,transform.position + new Vector3(0,-0.5f,1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 isParado=false;
@@ -35,7 +59,7 @@ public class PlayerMovement : MonoBehaviour{
                     isParado=true;
                 }
             }
-        }else if(Input.GetKeyDown(KeyCode.S)){
+        }else if(move=="S"){
             if(isParado){
                 StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,1f,0.5f), -Vector3.right, 90,transform.position + new Vector3(0,-0.5f,-1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 isParado=false;
@@ -48,7 +72,7 @@ public class PlayerMovement : MonoBehaviour{
                     isParado=true;
                 }
             }
-        }else if(Input.GetKeyDown(KeyCode.D)){
+        }else if(move=="D"){
             if(isParado){
                 StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(-0.5f,1f,0), -Vector3.forward, 90, transform.position + new Vector3(1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 isParado=false;
@@ -61,7 +85,7 @@ public class PlayerMovement : MonoBehaviour{
                     StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(-0.5f,0.5f,0), -Vector3.forward, 90, transform.position + new Vector3(1f,0f,0f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 }
             }
-        }else if(Input.GetKeyDown(KeyCode.A)){
+        }else if(move=="A"){
             if(isParado){
                 StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0.5f,1f,0), Vector3.forward, 90, transform.position + new Vector3(-1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 isParado=false;
@@ -87,7 +111,7 @@ public class PlayerMovement : MonoBehaviour{
         }
 
         correccionDeErrorRotacion(posFinal,rotFinal);
-
+        netxMove = true;
     }
 
     private void correccionDeErrorRotacion(Vector3 posFinal, Vector3 rotFinal){
