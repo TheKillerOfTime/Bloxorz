@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour{
     [Header("Logica de la rotacion")]
     private bool isParado=true;
-    [SerializeField]private float duracionRotacionPlayer = 2f;      // Tiempo que tarda en rotar
+    private float duracionRotacionPlayer = 0.5f;      // Tiempo que tarda en rotar
     private static readonly float[] angleParado     = { -90f, 90f, 0f };
     private static readonly float[] angleVertical   = { -180f, 180f, 0f };
     private static readonly float[] angleHorizontal = { 0f, 90f, 0f };
@@ -40,6 +40,12 @@ public class PlayerMovement : MonoBehaviour{
             colaMovimientos.Enqueue("D");
         }else if(Input.GetKeyDown(KeyCode.A)){
             colaMovimientos.Enqueue("A");
+        }else if(Input.GetKeyDown(KeyCode.Space)){
+            if(duracionRotacionPlayer==0.5f){
+                duracionRotacionPlayer=0.25f;
+            }else{
+                duracionRotacionPlayer=0.5f;
+            }
         }
     }
 
@@ -112,6 +118,9 @@ public class PlayerMovement : MonoBehaviour{
 
         correccionDeErrorRotacion(posFinal,rotFinal);
         netxMove = true;
+        if(colaMovimientos.Count==0){
+            duracionRotacionPlayer=0.5f;
+        }
     }
 
     private void correccionDeErrorRotacion(Vector3 posFinal, Vector3 rotFinal){
