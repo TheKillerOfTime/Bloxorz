@@ -42,10 +42,10 @@ public class PlayerMovement : MonoBehaviour{
             colaMovimientos.Add("A");
         }else if(Input.GetKeyDown(KeyCode.Space)){
             if(duracionRotacionPlayer==0.5f){
-                colaMovimientos.Clear();
                 duracionRotacionPlayer=0.25f;
             }else{
                 duracionRotacionPlayer=0.5f;
+                colaMovimientos.Clear();
             }
         }
     }
