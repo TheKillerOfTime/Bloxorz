@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour{
     private bool isHorizontal=false; //true: esta acostado  pero en vertical
     //Si esta vertical cambia la X, si esta en horizontal la Z ---- EJ vertical: (0, 0.5, -1.5),,, EJ horizontal (0.5, 0.5,0)
     [Header("Logica de la secuencia de movimientos")]
-    private Queue<string> colaMovimientos = new Queue<string>();
+    public static List<string> colaMovimientos = new List<string>();
     private bool netxMove=true;
     private string move;
 
@@ -33,15 +33,16 @@ public class PlayerMovement : MonoBehaviour{
 
     private void detectorDeMovimientos(){
         if(Input.GetKeyDown(KeyCode.W)){
-            colaMovimientos.Enqueue("W");
+            colaMovimientos.Add("W");
         }else if(Input.GetKeyDown(KeyCode.S)){
-            colaMovimientos.Enqueue("S");
+            colaMovimientos.Add("S");
         }else if(Input.GetKeyDown(KeyCode.D)){
-            colaMovimientos.Enqueue("D");
+            colaMovimientos.Add("D");
         }else if(Input.GetKeyDown(KeyCode.A)){
-            colaMovimientos.Enqueue("A");
+            colaMovimientos.Add("A");
         }else if(Input.GetKeyDown(KeyCode.Space)){
             if(duracionRotacionPlayer==0.5f){
+                colaMovimientos.Clear();
                 duracionRotacionPlayer=0.25f;
             }else{
                 duracionRotacionPlayer=0.5f;
@@ -51,7 +52,8 @@ public class PlayerMovement : MonoBehaviour{
 
     private void controlarRotacionPlayer(){
         netxMove=false;
-        move = colaMovimientos.Dequeue();
+        move = colaMovimientos[0];
+        colaMovimientos.RemoveAt(0);
         if(move=="W"){
             if(isParado){
                 StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,1f,-0.5f), Vector3.right, 90,transform.position + new Vector3(0,-0.5f,1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
