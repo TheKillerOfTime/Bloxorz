@@ -54,60 +54,60 @@ public class PlayerMovement : MonoBehaviour{
         move = colaMovimientos.Dequeue();
         if(move=="W"){
             if(isParado){
-                StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,1f,-0.5f), Vector3.right, 90,transform.position + new Vector3(0,-0.5f,1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
+                StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,1f,-0.5f), Vector3.right, 90,transform.position + new Vector3(0,-0.5f,1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 isParado=false;
                 isHorizontal=false;
             }else{
                 if(isHorizontal){
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,0.5f,-0.5f), Vector3.right, 90, transform.position + new Vector3(0,0,1f),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,0.5f,-0.5f), Vector3.right, 90, transform.position + new Vector3(0,0,1f),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 }else{
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,0.5f,-1f), Vector3.right, 90, transform.position + new Vector3(0,0.5f,1.5f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,0.5f,-1f), Vector3.right, 90, transform.position + new Vector3(0,0.5f,1.5f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
                     isParado=true;
                 }
             }
         }else if(move=="S"){
             if(isParado){
-                StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,1f,0.5f), -Vector3.right, 90,transform.position + new Vector3(0,-0.5f,-1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
+                StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,1f,0.5f), -Vector3.right, 90,transform.position + new Vector3(0,-0.5f,-1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 isParado=false;
                 isHorizontal=false;
             }else{
                 if(isHorizontal){
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,0.5f,0.5f), -Vector3.right, 90, transform.position + new Vector3(0,0,-1f),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,0.5f,0.5f), -Vector3.right, 90, transform.position + new Vector3(0,0,-1f),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 }else{
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0,0.5f,1f), -Vector3.right, 90, transform.position + new Vector3(0,0.5f,-1.5f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,0.5f,1f), -Vector3.right, 90, transform.position + new Vector3(0,0.5f,-1.5f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
                     isParado=true;
                 }
             }
         }else if(move=="D"){
             if(isParado){
-                StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(-0.5f,1f,0), -Vector3.forward, 90, transform.position + new Vector3(1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
+                StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(-0.5f,1f,0), -Vector3.forward, 90, transform.position + new Vector3(1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 isParado=false;
                 isHorizontal=true;
             }else{
                 if(isHorizontal){
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(-1f,0.5f,0), -Vector3.forward, 90, transform.position + new Vector3(1.5f,0.5f,0f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(-1f,0.5f,0), -Vector3.forward, 90, transform.position + new Vector3(1.5f,0.5f,0f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
                     isParado=true;
                 }else{
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(-0.5f,0.5f,0), -Vector3.forward, 90, transform.position + new Vector3(1f,0f,0f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(-0.5f,0.5f,0), -Vector3.forward, 90, transform.position + new Vector3(1f,0f,0f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 }
             }
         }else if(move=="A"){
             if(isParado){
-                StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0.5f,1f,0), Vector3.forward, 90, transform.position + new Vector3(-1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
+                StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0.5f,1f,0), Vector3.forward, 90, transform.position + new Vector3(-1.5f,-0.5f,0),new Vector3(angleHorizontal[0], angleHorizontal[1], angleHorizontal[2])));
                 isParado=false;
                 isHorizontal=true;
             }else{
                 if(isHorizontal){
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(1f,0.5f,0), Vector3.forward, 90, transform.position + new Vector3(-1.5f,0.5f,0f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(1f,0.5f,0), Vector3.forward, 90, transform.position + new Vector3(-1.5f,0.5f,0f) ,new Vector3(angleParado[0], angleParado[1], angleParado[2])));
                     isParado=true;
                 }else{
-                    StartCoroutine(RotarEnUnTiempo(transform.position - new Vector3(0.5f,0.5f,0), Vector3.forward, 90, transform.position + new Vector3(-1f,0f,0f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
+                    StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0.5f,0.5f,0), Vector3.forward, 90, transform.position + new Vector3(-1f,0f,0f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                 }
             }
         }
     }
 
-    IEnumerator RotarEnUnTiempo(Vector3 punto, Vector3 eje, float anguloTotal, Vector3 posFinal, Vector3 rotFinal){
+    IEnumerator rotarEnUnTiempo(Vector3 punto, Vector3 eje, float anguloTotal, Vector3 posFinal, Vector3 rotFinal){
         float anguloRotado = 0f;
         while (anguloRotado < Mathf.Abs(anguloTotal)){
             float anguloPaso = (Time.deltaTime / duracionRotacionPlayer) * Mathf.Abs(anguloTotal);
