@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour{
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static GameManager instance=null;
     private Cronometro cronometro;
-    public GameObject [] flechasPosiciones = new GameObject[4]; 
+    public GameObject [] flechasPosiciones = new GameObject[5]; 
     public Sprite[] flechas = new Sprite[5]; //ARRIBA,ABAJO,DERECHA,IZQUIERDA,VACIO
     private static bool aumentoNivel=false;
     private static int nivel = 1;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour{
                 case "A": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[3]; break;
             }
         }
-        for(int i = 3; i>=j; i--){
+        for(int i = 4; i>=j; i--){
             flechasPosiciones[i].GetComponent<Image>().sprite = flechas[4];
         }
 
