@@ -130,5 +130,8 @@ public class PlayerMovement : MonoBehaviour{
         transform.eulerAngles = rotFinal;
     }
 
+    public bool getIsParado(){
+        return isParado;
+    }
 
 }
