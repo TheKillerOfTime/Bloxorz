@@ -31,12 +31,22 @@ public class Cronometro{ //00:00:00:000
         }
     }
 
-    public void restartTimer(){
 
+
+    public void cambiarText(TextMeshProUGUI t){
+        timeText = t;
     }
 
-    public void activoDesactivo(){
-        corriendo=!corriendo;
+    public void reanudo(){
+        if(!corriendo){
+            corriendo=true;
+        }
+    }
+
+    public void pauso(){
+        if(corriendo){
+            corriendo=false;
+        }
     }
 
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour{
     
@@ -10,7 +11,8 @@ public class GameManager : MonoBehaviour{
     public Cronometro cronometro;
     public GameObject [] flechasPosiciones = new GameObject[5]; 
     public Sprite[] flechas = new Sprite[5]; //ARRIBA,ABAJO,DERECHA,IZQUIERDA,VACIO
-    public int nivel = 1;
+    public static int nivel = 1;
+    public bool levelUp=false;
     public TextMeshProUGUI nivelText;
     public TextMeshProUGUI timeText;
     public GameObject panelPause;
@@ -18,32 +20,26 @@ public class GameManager : MonoBehaviour{
     public GameObject mapa;
     public GameObject player;
     public bool gameOver=false;
+    public Camera camara;
+    public Transform origenCamara;
+    public Transform origenFinalCamara;
+    public Transform finalCamara;
+    private float duracion = 1f;
 
     void Start(){
+        camara = Camera.main;
         cronometro = new Cronometro(timeText, false);
-        cronometro.activoDesactivo();
-        nivelText.text = "Nivel: " + nivel;
+        cronometro.reanudo();
+        repintoNivelText();
         if(instance==null){
             instance=this;
+            instance.camara = this.camara;
             DontDestroyOnLoad(this);
         }else{
             pasarAtributos(this);
             Destroy(this);
         }
-        repintoNivelText();
-        
-    }
-
-    private void pasarAtributos(GameManager gm){
-        instance.flechasPosiciones = gm.flechasPosiciones;
-        instance.nivelText = gm.nivelText;
-        instance.timeText = gm.timeText;
-        instance.panelPause = gm.panelPause;
-        instance.panelJuego = gm.panelJuego;
-        instance.mapa = gm.mapa;
-        instance.player = gm.player;
-        instance.gameOver=false;
-
+        instance.StartCoroutine(moverCamaraInicio());
     }
 
     // Update is called once per frame
@@ -52,6 +48,62 @@ public class GameManager : MonoBehaviour{
         repintoNivelText();
         setNextMoves();
     }
+
+    private IEnumerator moverCamaraInicio(){
+        float tiempo = 0f;
+
+        while (tiempo < duracion)
+        {
+            // Interpola entre A y B en base al tiempo
+            instance.camara.transform.position = Vector3.Lerp(origenCamara.position, origenFinalCamara.position, tiempo / duracion);
+            tiempo += Time.deltaTime;
+            yield return null; // esperar al siguiente frame
+        }
+
+        // Asegurar que quede exactamente en el punto B
+        instance.camara.transform.position = origenFinalCamara.position;
+
+        // 🔹 Aquí van las cosas que quieres que pasen DESPUÉS
+        Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
+        cronometro.reanudo();
+    }
+
+    private IEnumerator moverCamaraFinal(){
+        float tiempo = 0f;
+
+        while (tiempo < duracion)
+        {
+            // Interpola entre A y B en base al tiempo
+            instance.camara.transform.position = Vector3.Lerp(origenFinalCamara.position, finalCamara.position, tiempo / duracion);
+            tiempo += Time.deltaTime;
+            yield return null; // esperar al siguiente frame
+        }
+
+        // Asegurar que quede exactamente en el punto B
+        instance.camara.transform.position = finalCamara.position;
+
+        // 🔹 Aquí van las cosas que quieres que pasen DESPUÉS
+        Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
+        cronometro.pauso();
+        nivel++;
+        levelUp=true;
+        Debug.Log(nivel);
+        SceneManager.LoadScene("Level "+nivel.ToString());
+    }
+
+    private void pasarAtributos(GameManager gm){
+        instance.flechasPosiciones = gm.flechasPosiciones;
+        instance.nivelText = gm.nivelText;
+        instance.timeText = gm.timeText;
+        instance.cronometro.cambiarText(instance.timeText);
+        instance.panelPause = gm.panelPause;
+        instance.panelJuego = gm.panelJuego;
+        instance.mapa = gm.mapa;
+        instance.player = gm.player;
+        instance.gameOver=false;
+        instance.camara = gm.camara;
+    }
+
 
     private void setNextMoves(){
         int j = PlayerMovement.colaMovimientos.Count;
@@ -92,9 +144,7 @@ public class GameManager : MonoBehaviour{
             }else{
                 if(player.GetComponent<PlayerMovement>().getIsParado()){
                     Debug.Log("GANASTE");
-                    nivel++;
-                    Debug.Log(nivel);
-                    SceneManager.LoadScene("Level "+nivel.ToString());
+                    instance.StartCoroutine(moverCamaraFinal());
                 }
             }
         }
