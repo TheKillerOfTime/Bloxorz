@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour{
     void Start(){
         camara = Camera.main;
         cronometro = new Cronometro(timeText, false);
-        cronometro.reanudo();
         repintoNivelText();
         if(instance==null){
             instance=this;
+            instance.cronometro = cronometro;
             instance.camara = this.camara;
             DontDestroyOnLoad(this);
         }else{
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        cronometro.correTimer();
+        instance.cronometro.correTimer();
         repintoNivelText();
         setNextMoves();
     }
@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour{
 
         // 🔹 Aquí van las cosas que quieres que pasen DESPUÉS
         Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
-        cronometro.reanudo();
+        instance.cronometro.reanudo();
     }
 
     private IEnumerator moverCamaraFinal(){
         float tiempo = 0f;
-
+        instance.cronometro.pauso();
         while (tiempo < duracion)
         {
             // Interpola entre A y B en base al tiempo
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour{
 
         // 🔹 Aquí van las cosas que quieres que pasen DESPUÉS
         Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
-        cronometro.pauso();
         nivel++;
         levelUp=true;
         Debug.Log(nivel);
@@ -95,12 +94,14 @@ public class GameManager : MonoBehaviour{
         instance.flechasPosiciones = gm.flechasPosiciones;
         instance.nivelText = gm.nivelText;
         instance.timeText = gm.timeText;
-        instance.cronometro.cambiarText(instance.timeText);
+        gm.timeText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:000}", Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() / 3600), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() % 3600) / 60), 
+        Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() % 60), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() * 1000) % 1000));
+        instance.cronometro.cambiarText(gm.timeText);
         instance.panelPause = gm.panelPause;
         instance.panelJuego = gm.panelJuego;
         instance.mapa = gm.mapa;
         instance.player = gm.player;
-        instance.gameOver=false;
+        instance.gameOver = false;
         instance.camara = gm.camara;
     }
 

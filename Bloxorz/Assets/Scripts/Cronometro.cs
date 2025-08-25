@@ -31,7 +31,9 @@ public class Cronometro{ //00:00:00:000
         }
     }
 
-
+    public float getTiempoTranscurrido(){
+        return tiempoTranscurrido;
+    }
 
     public void cambiarText(TextMeshProUGUI t){
         timeText = t;
