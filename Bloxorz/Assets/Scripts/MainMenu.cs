@@ -11,18 +11,7 @@ public class MainMenu : MonoBehaviour
     {
         
     }
-    public void AbrirOpciones()
-    {
-        Debug.Log(">>> AbrirOpciones ejecutado");
-        panelMenuPrincipal.SetActive(false);
-        panelOpciones.SetActive(true);
-    }
-    public void CerrarOpciones()
-    {
-        Debug.Log(">>> CerrarOpciones ejecutado");
-        panelOpciones.SetActive(false);
-        panelMenuPrincipal.SetActive(true);
-    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +27,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Salir() {
+        Debug.Log("Saliendo del juego...");
         Application.Quit();
     }
 
