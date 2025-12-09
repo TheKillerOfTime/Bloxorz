@@ -43,13 +43,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 328, y: 436, z: 328, w: 444}
+  spriteBorder: {x: 199, y: 360, z: 173, w: 347}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -95,7 +95,51 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: MarcosBotones_0
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 334
+        width: 1576
+        height: 491
+      alignment: 9
+      pivot: {x: 0.49567318, y: 0.41522384}
+      border: {x: 0, y: 0, z: 0, w: 20}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 350dbe9c8c9ed8f4e81742793dedecff
+      internalID: -1517836534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MarcosBotones_1
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 340
+        width: 1564
+        height: 478
+      alignment: 9
+      pivot: {x: 0.5125599, y: 0.44193333}
+      border: {x: 0, y: 0, z: 7, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42da6f0b988ad8e4db3528143c298828
+      internalID: 1360136567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -109,7 +153,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MarcosBotones_0: -1517836534
+      MarcosBotones_1: 1360136567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
