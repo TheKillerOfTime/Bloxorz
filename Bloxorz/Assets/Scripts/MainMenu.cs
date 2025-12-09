@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void EscenaJuego() {
-        SceneManager.LoadScene("EscenaJuego");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void CargarNivel(string nombreNivel) {
