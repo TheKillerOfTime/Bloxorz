@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5231330052219364210}
   m_Layer: 6
   m_Name: Celda_pierde
-  m_TagString: Win
+  m_TagString: Fin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,3 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc5959135815984084949f6259ac87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuManager: {fileID: 0}

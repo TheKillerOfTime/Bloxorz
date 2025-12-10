@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (62)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -351,6 +355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -455,6 +463,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,6 +794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (69)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1032,6 +1048,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1192,6 +1212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1261,6 +1285,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1708,6 +1736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (68)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2050,6 +2082,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (63)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2481,6 +2517,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (55)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2806,6 +2846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2988,7 +3032,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 641957860}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685921309}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: goBackToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &641957860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,6 +3142,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (66)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3224,6 +3284,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3784,6 +3848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3928,6 +3996,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (65)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4089,6 +4161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4158,6 +4234,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (54)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4341,7 +4421,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 987447718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685921309}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: restartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &987447718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4439,6 +4531,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4646,6 +4742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4715,6 +4815,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4875,6 +4979,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (67)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5246,6 +5354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (60)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5570,6 +5682,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5970,6 +6086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6129,6 +6249,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (56)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6290,6 +6414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6359,6 +6487,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6460,6 +6592,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6866,6 +7002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7014,6 +7154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (64)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7083,6 +7227,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7324,6 +7472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7393,6 +7545,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (58)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7644,6 +7800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Celda_pierde (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7713,6 +7873,10 @@ PrefabInstance:
     - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
       propertyPath: m_Name
       value: Celda_pierde (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569472240192574536, guid: d08565383b759cd48b1fe4b27071f2b8, type: 3}
+      propertyPath: m_TagString
+      value: Fin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8070,6 +8234,10 @@ PrefabInstance:
     - target: {fileID: 7440043606268496519, guid: 5dab898cbffecc242be20b4e5921f536, type: 3}
       propertyPath: m_Name
       value: Celda_gana
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043606268496519, guid: 5dab898cbffecc242be20b4e5921f536, type: 3}
+      propertyPath: m_TagString
+      value: Win
       objectReference: {fileID: 0}
     - target: {fileID: 7932614833455922423, guid: 5dab898cbffecc242be20b4e5921f536, type: 3}
       propertyPath: m_LocalScale.x

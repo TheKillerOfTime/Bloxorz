@@ -129,7 +129,11 @@ public class GameManager : MonoBehaviour{
 
     public void restartGame(){
         nivel = 1;
-        SceneManager.LoadScene("Nivel "+nivel.ToString());
+        SceneManager.LoadScene("Level "+ nivel.ToString());
+    }
+
+    public void goBackToMenu(){
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void setInicioGameManager(){
@@ -141,7 +145,6 @@ public class GameManager : MonoBehaviour{
             if(!bloquePerdedor){
                 panelPause.SetActive(true);
                 panelJuego.SetActive(false);
-                restartGame();
             }else{
                 if(player.GetComponent<PlayerMovement>().getIsParado()){
                     Debug.Log("GANASTE");
