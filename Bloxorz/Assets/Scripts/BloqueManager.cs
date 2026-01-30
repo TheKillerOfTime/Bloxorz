@@ -22,9 +22,10 @@ public class BloqueManager : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         rayoDetectorDeJugador();
-        if(colisiono){
+        if(colisiono && GameManager.pasoDeNivel){
             colisiono=false;
-           mainMenuManager.getColisionSiPierdeOGana(bloquePerdedor); 
+            GameManager.pasoDeNivel=false;
+            mainMenuManager.getColisionSiPierdeOGana(bloquePerdedor); 
         }
     }
 

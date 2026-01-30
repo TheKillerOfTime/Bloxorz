@@ -31,6 +31,10 @@ public class Cronometro{ //00:00:00:000
         }
     }
 
+    public void resetTimer(){
+        tiempoTranscurrido = 0f;
+    }
+
     public float getTiempoTranscurrido(){
         return tiempoTranscurrido;
     }

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour{
     
@@ -19,14 +20,27 @@ public class GameManager : MonoBehaviour{
     public GameObject panelJuego;
     public GameObject mapa;
     public GameObject player;
-    public bool gameOver=false;
+    public static bool gameOver=false;
+    public static bool pasoDeNivel=true;
     public Camera camara;
     public Transform origenCamara;
     public Transform origenFinalCamara;
     public Transform finalCamara;
     private float duracion = 1f;
+    private const int nivelMax=3;
 
     void Start(){
+        inicializoNivel();
+    }
+
+    // Update is called once per frame
+    void Update(){
+        instance.cronometro.correTimer();
+        repintoNivelText();
+        setNextMoves();
+    }
+
+    private void inicializoNivel(){
         camara = Camera.main;
         cronometro = new Cronometro(timeText, false);
         repintoNivelText();
@@ -37,21 +51,13 @@ public class GameManager : MonoBehaviour{
             DontDestroyOnLoad(this);
         }else{
             pasarAtributos(this);
-            Destroy(this);
         }
         instance.StartCoroutine(moverCamaraInicio());
     }
 
-    // Update is called once per frame
-    void Update(){
-        instance.cronometro.correTimer();
-        repintoNivelText();
-        setNextMoves();
-    }
-
     private IEnumerator moverCamaraInicio(){
         float tiempo = 0f;
-
+        pasoDeNivel=false;
         while (tiempo < duracion)
         {
             // Interpola entre A y B en base al tiempo
@@ -66,6 +72,7 @@ public class GameManager : MonoBehaviour{
         // 🔹 Aquí van las cosas que quieres que pasen DESPUÉS
         Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
         instance.cronometro.reanudo();
+        pasoDeNivel=true;
     }
 
     private IEnumerator moverCamaraFinal(){
@@ -86,41 +93,44 @@ public class GameManager : MonoBehaviour{
         Debug.Log("Movimiento terminado. Ahora pasan otras cosas.");
         nivel++;
         levelUp=true;
-        Debug.Log(nivel);
-        SceneManager.LoadScene("Level "+nivel.ToString());
+        if(nivel <= nivelMax){
+            Debug.Log(nivel);
+            SceneManager.LoadScene("Level "+nivel.ToString());
+        }else{
+            gameOver=true;
+            SceneManager.LoadScene("FinDelJuego");
+        }
     }
 
     private void pasarAtributos(GameManager gm){
         instance.flechasPosiciones = gm.flechasPosiciones;
         instance.nivelText = gm.nivelText;
         instance.timeText = gm.timeText;
-        gm.timeText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:000}", Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() / 3600), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() % 3600) / 60), 
-        Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() % 60), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() * 1000) % 1000));
+        gm.timeText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:000}", Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() / 3600), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() % 3600) / 60), Mathf.FloorToInt(instance.cronometro.getTiempoTranscurrido() % 60), Mathf.FloorToInt((instance.cronometro.getTiempoTranscurrido() * 1000) % 1000));
         instance.cronometro.cambiarText(gm.timeText);
         instance.panelPause = gm.panelPause;
         instance.panelJuego = gm.panelJuego;
         instance.mapa = gm.mapa;
         instance.player = gm.player;
-        instance.gameOver = false;
         instance.camara = gm.camara;
     }
 
 
     private void setNextMoves(){
-        int j = PlayerMovement.colaMovimientos.Count;
-        for (int i = 0; i < j && i < flechasPosiciones.Length; i++){
-            switch(PlayerMovement.colaMovimientos[i]){
-                case "W": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[0]; break;
-                case "S": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[1]; break;
-                case "D": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[2]; break;
-                case "A": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[3]; break;
+        if(!gameOver){
+            int j = PlayerMovement.colaMovimientos.Count;
+            for (int i = 0; i < j && i < flechasPosiciones.Length; i++){
+                switch(PlayerMovement.colaMovimientos[i]){
+                    case "W": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[0]; break;
+                    case "S": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[1]; break;
+                    case "D": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[2]; break;
+                    case "A": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[3]; break;
+                }
+            }
+            for(int i = 4; i>=j; i--){
+                flechasPosiciones[i].GetComponent<Image>().sprite = flechas[4];
             }
         }
-        for(int i = 4; i>=j; i--){
-            flechasPosiciones[i].GetComponent<Image>().sprite = flechas[4];
-        }
-
-        
     }
 
     private void repintoNivelText(){
@@ -145,6 +155,8 @@ public class GameManager : MonoBehaviour{
             if(!bloquePerdedor){
                 panelPause.SetActive(true);
                 panelJuego.SetActive(false);
+                gameOver = true;
+                instance.cronometro.resetTimer();
             }else{
                 if(player.GetComponent<PlayerMovement>().getIsParado()){
                     Debug.Log("GANASTE");
@@ -152,7 +164,6 @@ public class GameManager : MonoBehaviour{
                 }
             }
         }
-        gameOver = true;
     }
 
 }
