@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Data;
 using UnityEngine;
 
@@ -8,23 +8,23 @@ public class RecordsMenuController : MonoBehaviour
     public GameObject panelRecordsVisual;
     public MainMenuController mainMenuController;
 
-    [Header("ConfiguraciÛn de la Lista")]
-    public Transform contenedorLista;   // AquÌ arrastrar·s el "Content" del ScrollView
-    public GameObject prefabFilaRecord; // AquÌ arrastrar·s el Prefab de la fila
+    [Header("Configuraci√≥n de la Lista")]
+    public Transform contenedorLista;   // Aqu√≠ arrastrar√°s el "Content" del ScrollView
+    public GameObject prefabFilaRecord; // Aqu√≠ arrastrar√°s el Prefab de la fila
 
     // Variable interna para manejar la base de datos
     private IRecordDAO recordDAO;
 
     void Start()
     {
-        // 1. Inicializamos la conexiÛn a la base de datos al arrancar el juego
+        // 1. Inicializamos la conexi√≥n a la base de datos al arrancar el juego
         recordDAO = new SQLiteRecordDAO();
         //InsertarDatosDePrueba();
     }
 
     public void mostrar()
     {
-        // Si la conexiÛn no existe a˙n (porque es la primera vez), la creamos al instante
+        // Si la conexi√≥n no existe a√∫n (porque es la primera vez), la creamos al instante
         if (recordDAO == null)
         {
             recordDAO = new SQLiteRecordDAO();
@@ -50,7 +50,7 @@ public class RecordsMenuController : MonoBehaviour
 
     private void CargarDatos()
     {
-        // Limpiar lista visual (Borra los rÈcords viejos por si entras y sales del men˙ varias veces)
+        // Limpiar lista visual (Borra los r√©cords viejos por si entras y sales del men√∫ varias veces)
         foreach (Transform hijo in contenedorLista)
         {
             Destroy(hijo.gameObject);
@@ -66,8 +66,13 @@ public class RecordsMenuController : MonoBehaviour
             float tiempo = reader.GetFloat(1);
             DateTime fecha = reader.GetDateTime(2);
 
-            // Crear fila visual instanciando el prefab
+            // Crear fila visual
             GameObject nuevaFila = Instantiate(prefabFilaRecord, contenedorLista, false);
+
+            // ‚ö†Ô∏è TRUCO ANTI-M√ÅSCARA: Forzamos la escala a 1 y la profundidad Z a 0
+            nuevaFila.transform.localScale = Vector3.one;
+            Vector3 posLocal = nuevaFila.transform.localPosition;
+            nuevaFila.transform.localPosition = new Vector3(posLocal.x, posLocal.y, 0f);
 
             // Pasamos los datos a tu script de la fila
             FilaRecordView scriptVista = nuevaFila.GetComponent<FilaRecordView>();
@@ -89,14 +94,14 @@ public class RecordsMenuController : MonoBehaviour
         jugadorDAO.insertar("Lautaro");
         jugadorDAO.insertar("Carlos");
 
-        // 2. Obtenemos quÈ ID les asignÛ la base de datos
+        // 2. Obtenemos qu√© ID les asign√≥ la base de datos
         int idLautaro = jugadorDAO.obtenerIdPorNombre("Lautaro");
         int idCarlos = jugadorDAO.obtenerIdPorNombre("Carlos");
 
         // 3. Les guardamos partidas inventadas (usando DateTime.Now para la fecha)
         if (idLautaro != -1)
         {
-            recordDAO.insertarPartida(idLautaro, 45.2f, DateTime.Now.AddDays(-2)); // Partida de hace 2 dÌas
+            recordDAO.insertarPartida(idLautaro, 45.2f, DateTime.Now.AddDays(-2)); // Partida de hace 2 d√≠as
             recordDAO.insertarPartida(idLautaro, 38.5f, DateTime.Now);             // Partida de hoy (mejor tiempo)
         }
 
@@ -105,6 +110,6 @@ public class RecordsMenuController : MonoBehaviour
             recordDAO.insertarPartida(idCarlos, 50.1f, DateTime.Now.AddDays(-1));
         }
 
-        Debug.Log("°Datos de prueba inyectados con Èxito en SQLite!");
+        Debug.Log("¬°Datos de prueba inyectados con √©xito en SQLite!");
     }
 }
