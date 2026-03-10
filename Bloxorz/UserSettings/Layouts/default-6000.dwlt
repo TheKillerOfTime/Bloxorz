@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 37
+  controlID: 115
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 576
+    y: 631
     width: 1312
     height: 355
   m_SerializedDataModeController:
@@ -531,21 +531,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: eaad0000
     m_LastClickedID: 44522
-    m_ExpandedIDs: 0000000086ad0000
+    m_ExpandedIDs: 0000000086ad0000e8ad000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Scenes
+      m_OriginalName: Scenes
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 44522
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 5}
@@ -639,8 +639,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1314
-    y: 24
+    x: 1313
+    y: 79
     width: 606
     height: 907
   m_SerializedDataModeController:
@@ -689,7 +689,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79
     width: 432
     height: 526
   m_SerializedDataModeController:
@@ -706,9 +706,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 2eae0000
       m_LastClickedID: 0
-      m_ExpandedIDs: aee2ffff26eaffff18fbffff98aa0000c4b00000d8b00000f2b00000
+      m_ExpandedIDs: acc1feffd8c5feff88d0feff1ad1feff2ad4feffaad4feff38d5feff82d8feff1807ffff4016ffffb41fffffee20fffffa41ffffee42ffff7a43ffff7e44ffffb851ffffae63ffffea7bffffc69effff669fffff2ca6ffff2ac9ffffccc9ffff5cd0ffff4ed2ffff18d3ffff7ee1ffff8ce2ffff9ee5ffff7ef6ffff18fbffff80ae0000aaae0000c4ae0000bab20000c4b20000e0b2000032c300004ec300000cf7000030f7000088f700009af70000c8fe000020ff000032ff0000840d0100a80d0100000e0100120e0100821601009e160100962d01005e2e0100682e0100842e0100ae2f0100ca2f0100cc3f0100e83f0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0, y: 0, z: -0, w: -1}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
     m_Target: 765.50226
     speed: 2
@@ -1323,8 +1323,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 434
-    y: 24
+    x: 433
+    y: 79
     width: 878
     height: 526
   m_SerializedDataModeController:

@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class CambiarColor : MonoBehaviour
 {
-    // [SerializeField] permite ver variables privadas en el Inspector
     [SerializeField] private GameObject playerVisualMenu;
     [SerializeField] private Color[] colores;
 
-    // Estado interno estático (privado)
     private static int indiceColorSeleccionado = 0;
 
-    // Propiedad pública para que otros scripts puedan LEER qué color se eligió
-    // Se usa así desde otro script: CambiarColor.IndiceColorSeleccionado
+    // NUEVA VARIABLE ESTÁTICA: Guarda el color real para pasarlo al juego
+    public static Color ColorSeleccionado = Color.white;
+
     public static int IndiceColorSeleccionado
     {
         get { return indiceColorSeleccionado; }
@@ -48,6 +47,9 @@ public class CambiarColor : MonoBehaviour
         if (rendMenu != null && colores.Length > 0)
         {
             Color c = colores[indiceColorSeleccionado];
+
+            // Guardamos el color en la variable estática para usarlo en otros niveles
+            ColorSeleccionado = c;
 
             Material[] materiales = rendMenu.materials;
             for (int i = 0; i < materiales.Length; i++)
