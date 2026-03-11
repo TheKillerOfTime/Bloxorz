@@ -150,17 +150,27 @@ public class GameManager : MonoBehaviour{
         gameOver = false;
     }
 
-    public void getColisionSiPierdeOGana(bool bloquePerdedor){
-        if(!gameOver){
-            if(!bloquePerdedor){
+    public void getColisionSiPierdeOGana(bool bloquePerdedor)
+    {
+        if (!gameOver)
+        {
+            if (!bloquePerdedor)
+            {
                 panelPause.SetActive(true);
                 panelJuego.SetActive(false);
                 gameOver = true;
                 instance.cronometro.resetTimer();
-            }else{
-                if(player.GetComponent<PlayerMovement>().getIsParado()){
+            }
+            else
+            {
+                if (player.GetComponent<PlayerMovement>().getIsParado() && player.GetComponent<PlayerMovement>().getEstaQuieto())
+                {
                     Debug.Log("GANASTE");
                     instance.StartCoroutine(moverCamaraFinal());
+                }
+                else
+                {
+                    pasoDeNivel = true;
                 }
             }
         }

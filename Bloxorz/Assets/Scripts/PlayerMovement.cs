@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour{
     public static List<string> colaMovimientos = new List<string>();
     private bool netxMove=true;
     private string move;
+    [Header("Efectos de Sonido")]
+    public AudioSource sfxMovimiento;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -56,7 +58,8 @@ public class PlayerMovement : MonoBehaviour{
                 netxMove=false;
                 move = colaMovimientos[0];
                 colaMovimientos.RemoveAt(0);
-                if(move=="W"){
+               
+                if (move=="W"){
                     if(isParado){
                         StartCoroutine(rotarEnUnTiempo(transform.position - new Vector3(0,1f,-0.5f), Vector3.right, 90,transform.position + new Vector3(0,-0.5f,1.5f),new Vector3(angleVertical[0], angleVertical[1],angleVertical[2])));
                         isParado=false;
@@ -125,8 +128,12 @@ public class PlayerMovement : MonoBehaviour{
             anguloRotado += anguloPaso;
             yield return null;
         }
-
+        
         correccionDeErrorRotacion(posFinal,rotFinal);
+        if (sfxMovimiento != null && sfxMovimiento.clip != null)
+        {
+            sfxMovimiento.Play();
+        }
         netxMove = true;
         if(colaMovimientos.Count==0){
             duracionRotacionPlayer=0.5f;
@@ -140,6 +147,11 @@ public class PlayerMovement : MonoBehaviour{
 
     public bool getIsParado(){
         return isParado;
+    }
+
+    public bool getEstaQuieto()
+    {
+        return netxMove; // Devuelve true si la animación terminó y está apoyado
     }
 
 }
