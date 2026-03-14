@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using UnityEngine;
+using TMPro; // Necesario para el InputField
 
 public class RecordsMenuController : MonoBehaviour
 {
@@ -9,27 +10,24 @@ public class RecordsMenuController : MonoBehaviour
     public MainMenuController mainMenuController;
 
     [Header("Configuración de la Lista")]
-    public Transform contenedorLista;   // Aquí arrastrarás el "Content" del ScrollView
-    public GameObject prefabFilaRecord; // Aquí arrastrarás el Prefab de la fila
+    public Transform contenedorLista;
+    public GameObject prefabFilaRecord;
 
-    // Variable interna para manejar la base de datos
+    [Header("Edición de Récord")]
+    public GameObject panelEditarVisual; // Un panel pequeño que crearemos ahora
+    public TMP_InputField inputEdicionNombre; // Donde el usuario escribirá el nuevo nombre
+    private int idRecordAEditar = -1;
+
     private IRecordDAO recordDAO;
 
     void Start()
     {
-        // 1. Inicializamos la conexión a la base de datos al arrancar el juego
         recordDAO = new SQLiteRecordDAO();
-        //InsertarDatosDePrueba();
     }
 
     public void mostrar()
     {
-        // Si la conexión no existe aún (porque es la primera vez), la creamos al instante
-        if (recordDAO == null)
-        {
-            recordDAO = new SQLiteRecordDAO();
-        }
-
+        if (recordDAO == null) recordDAO = new SQLiteRecordDAO();
         panelRecordsVisual.SetActive(true);
         CargarDatos();
     }
@@ -42,74 +40,66 @@ public class RecordsMenuController : MonoBehaviour
     public void cerrarVentanaRecords()
     {
         ocultar();
-        if (mainMenuController != null)
-        {
-            mainMenuController.mostrarMenuPrincipal();
-        }
+        if (mainMenuController != null) mainMenuController.mostrarMenuPrincipal();
     }
 
     private void CargarDatos()
     {
-        // Limpiar lista visual (Borra los récords viejos por si entras y sales del menú varias veces)
-        foreach (Transform hijo in contenedorLista)
-        {
-            Destroy(hijo.gameObject);
-        }
+        foreach (Transform hijo in contenedorLista) Destroy(hijo.gameObject);
 
-        // Obtener datos de SQLite
         IDataReader reader = recordDAO.obtenerRanking();
 
         while (reader.Read())
         {
-            // OJO al orden del SELECT: 0 = nombre, 1 = tiempo, 2 = fecha
-            string nombre = reader.GetString(0);
-            float tiempo = reader.GetFloat(1);
-            DateTime fecha = reader.GetDateTime(2);
+            int idRecord = reader.GetInt32(0);
+            string nombre = reader.GetString(1);
+            float tiempo = reader.GetFloat(2);
+            DateTime fecha = reader.GetDateTime(3);
 
-            // Crear fila visual
             GameObject nuevaFila = Instantiate(prefabFilaRecord, contenedorLista, false);
-
-            // ⚠️ TRUCO ANTI-MÁSCARA: Forzamos la escala a 1 y la profundidad Z a 0
             nuevaFila.transform.localScale = Vector3.one;
-            Vector3 posLocal = nuevaFila.transform.localPosition;
-            nuevaFila.transform.localPosition = new Vector3(posLocal.x, posLocal.y, 0f);
+            nuevaFila.transform.localPosition = new Vector3(nuevaFila.transform.localPosition.x, nuevaFila.transform.localPosition.y, 0f);
 
-            // Pasamos los datos a tu script de la fila
             FilaRecordView scriptVista = nuevaFila.GetComponent<FilaRecordView>();
             if (scriptVista != null)
             {
-                scriptVista.ConfigurarFila(nombre, tiempo, fecha);
+                // 🔹 AQUÍ ESTÁ LA MAGIA: Le pasamos las funciones directamente a la fila
+                scriptVista.ConfigurarFila(idRecord, nombre, tiempo, fecha, EjecutarEliminar, AbrirMenuEditar);
             }
         }
-
-        // Importante cerrar el reader para no bloquear la base de datos
         reader.Close();
     }
-    private void InsertarDatosDePrueba()
+
+    // --- FUNCIONES QUE SE DISPARAN AL TOCAR LOS BOTONES DE LA FILA ---
+
+    private void EjecutarEliminar(int idParaBorrar)
     {
-        // Instanciamos el DAO de jugadores para poder crearlos
-        IJugadorDAO jugadorDAO = new SQLiteJugadorDAO();
+        recordDAO.eliminarRecord(idParaBorrar); // Lo borra de SQLite
+        CargarDatos(); // 🔹 Recarga la lista para que desaparezca al instante
+    }
 
-        // 1. Insertamos un par de jugadores de prueba
-        jugadorDAO.insertar("Lautaro");
-        jugadorDAO.insertar("Carlos");
+    private void AbrirMenuEditar(int idParaEditar)
+    {
+        idRecordAEditar = idParaEditar;
+        inputEdicionNombre.text = ""; // Limpiamos el texto
+        panelEditarVisual.SetActive(true); // Encendemos el panel de edición
+    }
 
-        // 2. Obtenemos qué ID les asignó la base de datos
-        int idLautaro = jugadorDAO.obtenerIdPorNombre("Lautaro");
-        int idCarlos = jugadorDAO.obtenerIdPorNombre("Carlos");
+    // --- FUNCIONES DEL PANEL DE EDICIÓN ---
 
-        // 3. Les guardamos partidas inventadas (usando DateTime.Now para la fecha)
-        if (idLautaro != -1)
+    public void GuardarEdicionBoton()
+    {
+        string nuevoNombre = inputEdicionNombre.text.Trim();
+        if (!string.IsNullOrEmpty(nuevoNombre) && idRecordAEditar != -1)
         {
-            recordDAO.insertarPartida(idLautaro, 45.2f, DateTime.Now.AddDays(-2)); // Partida de hace 2 días
-            recordDAO.insertarPartida(idLautaro, 38.5f, DateTime.Now);             // Partida de hoy (mejor tiempo)
+            recordDAO.actualizarNombreRecord(idRecordAEditar, nuevoNombre);
+            panelEditarVisual.SetActive(false);
+            CargarDatos(); // 🔹 Recarga la lista para ver el nuevo nombre
         }
+    }
 
-        if (idCarlos != -1)
-        {
-            recordDAO.insertarPartida(idCarlos, 50.1f, DateTime.Now.AddDays(-1));
-        }
-
-        Debug.Log("¡Datos de prueba inyectados con éxito en SQLite!");
+    public void CancelarEdicionBoton()
+    {
+        panelEditarVisual.SetActive(false);
     }
 }

@@ -16,4 +16,6 @@ public interface IRecordDAO
 
     // Devuelve un IDataReader para leer los datos crudos de SQLite
     IDataReader obtenerRanking();
+    void eliminarRecord(int id_record);
+    void actualizarNombreRecord(int id_record, string nuevoNombre);
 }

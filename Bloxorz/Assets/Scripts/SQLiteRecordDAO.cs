@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Data;
 using System.IO;
 using Mono.Data.SqliteClient;
@@ -10,11 +10,9 @@ public class SQLiteRecordDAO : IRecordDAO
 
     public SQLiteRecordDAO()
     {
-        // Definimos la ruta donde se guardar· la base de datos en tu equipo
         string dbPath = Application.persistentDataPath + "/BloxorzDatabase.db";
         connectionString = "URI=file:" + dbPath;
 
-        // Nos aseguramos de que las tablas existan al iniciar
         CrearTablasSiNoExisten();
     }
 
@@ -25,11 +23,9 @@ public class SQLiteRecordDAO : IRecordDAO
             conn.Open();
             using (var cmd = conn.CreateCommand())
             {
-                // Activamos las claves for·neas (Foreign Keys) que vienen desactivadas por defecto en SQLite
                 cmd.CommandText = "PRAGMA foreign_keys = ON;";
                 cmd.ExecuteNonQuery();
 
-                // Creamos las tablas respetando exactamente tu diagrama UML
                 cmd.CommandText = @"
                     CREATE TABLE IF NOT EXISTS Jugador (
                         id_jugador INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -48,7 +44,6 @@ public class SQLiteRecordDAO : IRecordDAO
         }
     }
 
-    // ImplementaciÛn del mÈtodo de la interfaz IRecordDAO
     public void insertarPartida(int id_jugador, float tiempo, DateTime fecha)
     {
         using (var conn = new SqliteConnection(connectionString))
@@ -56,35 +51,68 @@ public class SQLiteRecordDAO : IRecordDAO
             conn.Open();
             using (var cmd = conn.CreateCommand())
             {
-                // Insertamos los datos en la tabla Record
                 cmd.CommandText = "INSERT INTO Record (id_jugador, tiempo, fecha) VALUES (@id, @t, @f)";
                 cmd.Parameters.Add(new SqliteParameter("@id", id_jugador));
                 cmd.Parameters.Add(new SqliteParameter("@t", tiempo));
-
-                // Formateamos la fecha para que SQLite la guarde de forma est·ndar (AÒo-Mes-DÌa)
                 cmd.Parameters.Add(new SqliteParameter("@f", fecha.ToString("yyyy-MM-dd HH:mm:ss")));
-
                 cmd.ExecuteNonQuery();
             }
         }
     }
 
-    // ImplementaciÛn del mÈtodo de la interfaz IRecordDAO
     public IDataReader obtenerRanking()
     {
         SqliteConnection conn = new SqliteConnection(connectionString);
         conn.Open();
         SqliteCommand cmd = (SqliteCommand)conn.CreateCommand();
 
-        // Realizamos el JOIN para traer el nombre del jugador junto con sus rÈcords.
-        // Agrupamos primero por nombre (alfabÈtico) y luego ordenamos sus tiempos de menor a mayor.
+        // üîπ EL CAMBIO EST√Å EN EL 'ORDER BY': 
+        // Le quitamos 'j.nombre ASC' para que solo le importe el tiempo m√°s bajo
         cmd.CommandText = @"
-            SELECT j.nombre, r.tiempo, r.fecha 
+            SELECT r.id_record, j.nombre, r.tiempo, r.fecha 
             FROM Record r 
             JOIN Jugador j ON r.id_jugador = j.id_jugador
-            ORDER BY j.nombre ASC, r.tiempo ASC";
+            ORDER BY r.tiempo ASC";
 
-        // Devolvemos el DataReader y le indicamos que cierre la conexiÛn al terminar de leer
         return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+    }
+
+    //Borra la fila exacta de la base de datos usando su ID
+    public void eliminarRecord(int id_record)
+    {
+        using (var conn = new SqliteConnection(connectionString))
+        {
+            conn.Open();
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "DELETE FROM Record WHERE id_record = @id";
+                cmd.Parameters.Add(new SqliteParameter("@id", id_record));
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+    public void actualizarNombreRecord(int id_record, string nuevoNombre)
+    {
+        using (var conn = new SqliteConnection(connectionString))
+        {
+            conn.Open();
+            using (var cmd = conn.CreateCommand())
+            {
+                // 1. Guardamos el nuevo jugador (Si ya existe, el 'IGNORE' evita errores)
+                cmd.CommandText = "INSERT OR IGNORE INTO Jugador (nombre) VALUES (@nombre)";
+                cmd.Parameters.Add(new SqliteParameter("@nombre", nuevoNombre));
+                cmd.ExecuteNonQuery();
+
+                // 2. Buscamos el ID de ese jugador (nuevo o existente)
+                cmd.CommandText = "SELECT id_jugador FROM Jugador WHERE nombre = @nombre";
+                int id_jugador = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // 3. Actualizamos el r√©cord para que pertenezca a este jugador
+                cmd.CommandText = "UPDATE Record SET id_jugador = @idJugador WHERE id_record = @idRecord";
+                cmd.Parameters.Add(new SqliteParameter("@idJugador", id_jugador));
+                cmd.Parameters.Add(new SqliteParameter("@idRecord", id_record));
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
