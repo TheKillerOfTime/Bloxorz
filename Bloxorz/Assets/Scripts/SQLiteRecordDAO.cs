@@ -76,43 +76,4 @@ public class SQLiteRecordDAO : IRecordDAO
 
         return cmd.ExecuteReader(CommandBehavior.CloseConnection);
     }
-
-    //Borra la fila exacta de la base de datos usando su ID
-    public void eliminarRecord(int id_record)
-    {
-        using (var conn = new SqliteConnection(connectionString))
-        {
-            conn.Open();
-            using (var cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = "DELETE FROM Record WHERE id_record = @id";
-                cmd.Parameters.Add(new SqliteParameter("@id", id_record));
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
-    public void actualizarNombreRecord(int id_record, string nuevoNombre)
-    {
-        using (var conn = new SqliteConnection(connectionString))
-        {
-            conn.Open();
-            using (var cmd = conn.CreateCommand())
-            {
-                // 1. Guardamos el nuevo jugador (Si ya existe, el 'IGNORE' evita errores)
-                cmd.CommandText = "INSERT OR IGNORE INTO Jugador (nombre) VALUES (@nombre)";
-                cmd.Parameters.Add(new SqliteParameter("@nombre", nuevoNombre));
-                cmd.ExecuteNonQuery();
-
-                // 2. Buscamos el ID de ese jugador (nuevo o existente)
-                cmd.CommandText = "SELECT id_jugador FROM Jugador WHERE nombre = @nombre";
-                int id_jugador = Convert.ToInt32(cmd.ExecuteScalar());
-
-                // 3. Actualizamos el récord para que pertenezca a este jugador
-                cmd.CommandText = "UPDATE Record SET id_jugador = @idJugador WHERE id_record = @idRecord";
-                cmd.Parameters.Add(new SqliteParameter("@idJugador", id_jugador));
-                cmd.Parameters.Add(new SqliteParameter("@idRecord", id_record));
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
 }

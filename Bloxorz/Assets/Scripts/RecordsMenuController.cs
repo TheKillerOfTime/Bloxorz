@@ -64,42 +64,9 @@ public class RecordsMenuController : MonoBehaviour
             if (scriptVista != null)
             {
                 // 🔹 AQUÍ ESTÁ LA MAGIA: Le pasamos las funciones directamente a la fila
-                scriptVista.ConfigurarFila(idRecord, nombre, tiempo, fecha, EjecutarEliminar, AbrirMenuEditar);
+                scriptVista.ConfigurarFila(idRecord, nombre, tiempo, fecha);
             }
         }
         reader.Close();
-    }
-
-    // --- FUNCIONES QUE SE DISPARAN AL TOCAR LOS BOTONES DE LA FILA ---
-
-    private void EjecutarEliminar(int idParaBorrar)
-    {
-        recordDAO.eliminarRecord(idParaBorrar); // Lo borra de SQLite
-        CargarDatos(); // 🔹 Recarga la lista para que desaparezca al instante
-    }
-
-    private void AbrirMenuEditar(int idParaEditar)
-    {
-        idRecordAEditar = idParaEditar;
-        inputEdicionNombre.text = ""; // Limpiamos el texto
-        panelEditarVisual.SetActive(true); // Encendemos el panel de edición
-    }
-
-    // --- FUNCIONES DEL PANEL DE EDICIÓN ---
-
-    public void GuardarEdicionBoton()
-    {
-        string nuevoNombre = inputEdicionNombre.text.Trim();
-        if (!string.IsNullOrEmpty(nuevoNombre) && idRecordAEditar != -1)
-        {
-            recordDAO.actualizarNombreRecord(idRecordAEditar, nuevoNombre);
-            panelEditarVisual.SetActive(false);
-            CargarDatos(); // 🔹 Recarga la lista para ver el nuevo nombre
-        }
-    }
-
-    public void CancelarEdicionBoton()
-    {
-        panelEditarVisual.SetActive(false);
     }
 }
