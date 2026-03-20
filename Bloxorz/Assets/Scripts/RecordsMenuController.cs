@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using UnityEngine;
-using TMPro; // Necesario para el InputField
 
 public class RecordsMenuController : MonoBehaviour
 {
@@ -9,20 +8,19 @@ public class RecordsMenuController : MonoBehaviour
     public GameObject panelRecordsVisual;
     public MainMenuController mainMenuController;
 
+    // 🔹 NUEVO: Referencia a tu texto de "No hay récords"
+    public GameObject mensajeSinRecords;
+
     [Header("Configuración de la Lista")]
     public Transform contenedorLista;
     public GameObject prefabFilaRecord;
-
-    [Header("Edición de Récord")]
-    public GameObject panelEditarVisual; // Un panel pequeño que crearemos ahora
-    public TMP_InputField inputEdicionNombre; // Donde el usuario escribirá el nuevo nombre
-    private int idRecordAEditar = -1;
 
     private IRecordDAO recordDAO;
 
     void Start()
     {
         recordDAO = new SQLiteRecordDAO();
+        Debug.Log("Ruta de la BDD: " + Application.persistentDataPath);
     }
 
     public void mostrar()
@@ -45,13 +43,20 @@ public class RecordsMenuController : MonoBehaviour
 
     private void CargarDatos()
     {
+        // 1. Limpiamos la lista visual vieja
         foreach (Transform hijo in contenedorLista) Destroy(hijo.gameObject);
 
         IDataReader reader = recordDAO.obtenerRanking();
 
+        // 🔹 NUEVO: Creamos un contador para saber si encontramos algo
+        int cantidadRecords = 0;
+
         while (reader.Read())
         {
-            int idRecord = reader.GetInt32(0);
+            cantidadRecords++; // Sumamos 1 por cada fila que exista
+
+            // Nota: Asumo que tu SELECT trae: 0=id, 1=nombre, 2=tiempo, 3=fecha.
+            // Si le quitaste el ID a tu SELECT, ajusta los números (0=nombre, 1=tiempo, 2=fecha)
             string nombre = reader.GetString(1);
             float tiempo = reader.GetFloat(2);
             DateTime fecha = reader.GetDateTime(3);
@@ -63,10 +68,15 @@ public class RecordsMenuController : MonoBehaviour
             FilaRecordView scriptVista = nuevaFila.GetComponent<FilaRecordView>();
             if (scriptVista != null)
             {
-                // 🔹 AQUÍ ESTÁ LA MAGIA: Le pasamos las funciones directamente a la fila
-                scriptVista.ConfigurarFila(idRecord, nombre, tiempo, fecha);
+                // Como quitaste los botones, volvemos a la configuración simple
+                scriptVista.ConfigurarFila(nombre, tiempo, fecha);
             }
         }
         reader.Close();
+
+        if (mensajeSinRecords != null)
+        {
+            mensajeSinRecords.SetActive(cantidadRecords == 0);
+        }
     }
 }

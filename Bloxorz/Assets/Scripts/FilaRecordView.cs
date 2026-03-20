@@ -19,9 +19,8 @@ public class FilaRecordView : MonoBehaviour
     private Action<int> accionEditar;
 
     // 🔹 Se agregaron dos parámetros al final para recibir las órdenes
-    public void ConfigurarFila(int idRecord, string nombre, float tiempo, DateTime fecha)
+    public void ConfigurarFila(string nombre, float tiempo, DateTime fecha)
     {
-        idRecordActual = idRecord;
         textoNombre.text = nombre;
         textoTiempo.text = tiempo.ToString("F2") + " s";
         textoFecha.text = fecha.ToString("dd/MM/yyyy");

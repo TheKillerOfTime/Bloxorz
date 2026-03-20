@@ -40,18 +40,25 @@ public class GameManager : MonoBehaviour{
         setNextMoves();
     }
 
-    private void inicializoNivel(){
+    private void inicializoNivel()
+    {
         camara = Camera.main;
         cronometro = new Cronometro(timeText, false);
         repintoNivelText();
-        if(instance==null){
-            instance=this;
+
+        if (instance == null)
+        {
+            instance = this;
             instance.cronometro = cronometro;
             instance.camara = this.camara;
-            DontDestroyOnLoad(this);
-        }else{
-            pasarAtributos(this);
+            DontDestroyOnLoad(this); // El original se vuelve inmortal
         }
+        else
+        {
+            pasarAtributos(this); // Le pasamos los datos frescos al inmortal
+            Destroy(gameObject);  // 🔹 ¡LA CLAVE! Destruimos este clon para que no estorbe
+        }
+
         instance.StartCoroutine(moverCamaraInicio());
     }
 
@@ -116,25 +123,43 @@ public class GameManager : MonoBehaviour{
     }
 
 
-    private void setNextMoves(){
-        if(!gameOver){
+    private void setNextMoves()
+    {
+        if (!gameOver && flechasPosiciones != null)
+        {
             int j = PlayerMovement.colaMovimientos.Count;
-            for (int i = 0; i < j && i < flechasPosiciones.Length; i++){
-                switch(PlayerMovement.colaMovimientos[i]){
-                    case "W": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[0]; break;
-                    case "S": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[1]; break;
-                    case "D": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[2]; break;
-                    case "A": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[3]; break;
+            for (int i = 0; i < j && i < flechasPosiciones.Length; i++)
+            {
+                // 🔹 Solo pintamos si la flecha no ha sido destruida
+                if (flechasPosiciones[i] != null)
+                {
+                    switch (PlayerMovement.colaMovimientos[i])
+                    {
+                        case "W": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[0]; break;
+                        case "S": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[1]; break;
+                        case "D": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[2]; break;
+                        case "A": flechasPosiciones[i].GetComponent<Image>().sprite = flechas[3]; break;
+                    }
                 }
             }
-            for(int i = 4; i>=j; i--){
-                flechasPosiciones[i].GetComponent<Image>().sprite = flechas[4];
+            for (int i = 4; i >= j; i--)
+            {
+                // 🔹 Verificamos aquí también
+                if (flechasPosiciones[i] != null)
+                {
+                    flechasPosiciones[i].GetComponent<Image>().sprite = flechas[4];
+                }
             }
         }
     }
 
-    private void repintoNivelText(){
-        nivelText.text = "Nivel: " + nivel.ToString();
+    private void repintoNivelText()
+    {
+        // Solo intentamos cambiar el texto si el objeto no ha sido destruido
+        if (nivelText != null)
+        {
+            nivelText.text = "Nivel: " + nivel.ToString();
+        }
     }
 
     public void restartGame(){
@@ -142,7 +167,15 @@ public class GameManager : MonoBehaviour{
         SceneManager.LoadScene("Level "+ nivel.ToString());
     }
 
-    public void goBackToMenu(){
+    public void goBackToMenu()
+    {
+        // Autodestruimos este GameManager para que no estorbe en el menú
+        if (instance != null)
+        {
+            Destroy(instance.gameObject);
+            instance = null;
+        }
+
         SceneManager.LoadScene("Main Menu");
     }
 
