@@ -162,9 +162,17 @@ public class GameManager : MonoBehaviour{
         }
     }
 
-    public void restartGame(){
+    public void restartGame()
+    {
+        // 🔹 Restablecemos la variable global al primer nivel
         nivel = 1;
-        SceneManager.LoadScene("Level "+ nivel.ToString());
+
+        // Forzamos a que el juego sepa que empezamos de cero
+        gameOver = false;
+        pasoDeNivel = true;
+
+        // Como nivel ahora es 1, esto siempre cargará "Level 1"
+        SceneManager.LoadScene("Level " + nivel.ToString());
     }
 
     public void goBackToMenu()
