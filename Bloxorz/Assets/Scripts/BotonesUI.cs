@@ -18,5 +18,12 @@ public class BotonesUI : MonoBehaviour
             GameManager.instance.goBackToMenu();
         }
     }
+    public void clickReanudar()
+    {
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.ReanudarJuego();
+        }
+    }
 }
 

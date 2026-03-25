@@ -28,17 +28,50 @@ public class GameManager : MonoBehaviour{
     public Transform finalCamara;
     private float duracion = 1f;
     private const int nivelMax=3;
+    [Header("Menú de Pausa")]
+    public GameObject panelMenuPausa; // El nuevo cartel visual de Pausa
+    public bool isPaused = false;
 
     void Start(){
         inicializoNivel();
     }
 
-    // Update is called once per frame
     void Update(){
-        instance.cronometro.correTimer();
+        // Solo corremos el timer si NO estamos pausados y NO perdimos
+        if (!isPaused && !gameOver) {
+            instance.cronometro.correTimer();
+        }
+
         repintoNivelText();
         setNextMoves();
+
+        // 🔹 DETECTAR LA TECLA ESCAPE
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
+        {
+            if (isPaused) {
+                ReanudarJuego();
+            } else {
+                PausarJuego();
+            }
+        }
     }
+    public void PausarJuego()
+    {
+        isPaused = true;
+        Time.timeScale = 0f; // 🔹 Congela el universo de Unity
+        instance.cronometro.pauso(); // Pausamos tu cronómetro manual
+        panelMenuPausa.SetActive(true); // Mostramos el panel
+        PlayerMovement.colaMovimientos.Clear(); // Limpiamos las teclas para que no se acumulen
+    }
+
+    public void ReanudarJuego()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // 🔹 Descongela el universo
+        instance.cronometro.reanudo();
+        panelMenuPausa.SetActive(false); // Ocultamos el panel
+    }
+
 
     private void inicializoNivel()
     {
@@ -120,6 +153,7 @@ public class GameManager : MonoBehaviour{
         instance.mapa = gm.mapa;
         instance.player = gm.player;
         instance.camara = gm.camara;
+        instance.panelMenuPausa = gm.panelMenuPausa;
     }
 
 
@@ -177,13 +211,14 @@ public class GameManager : MonoBehaviour{
 
     public void goBackToMenu()
     {
-        // Autodestruimos este GameManager para que no estorbe en el menú
+        Time.timeScale = 1f; // 🔹 MUY IMPORTANTE: Descongelar el tiempo antes de salir
+        isPaused = false;
+
         if (instance != null)
         {
             Destroy(instance.gameObject);
             instance = null;
         }
-
         SceneManager.LoadScene("Main Menu");
     }
 
