@@ -1342,6 +1342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340f7ee27e4d46e439426c7bebe681f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonidoClick: {fileID: 0}
 --- !u!114 &332556326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,6 +2735,7 @@ MonoBehaviour:
   finalCamara: {fileID: 461931350}
   panelMenuPausa: {fileID: 332556323}
   isPaused: 0
+  sonidoVictoria: {fileID: 8300000, guid: 1d8178878656f064cbe4bf12bb0a8720, type: 3}
 --- !u!4 &685921310
 Transform:
   m_ObjectHideFlags: 0
@@ -3548,6 +3550,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 332556325}
+        m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
+        m_MethodName: reproducirSonido
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &860371108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3808,6 +3822,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1055197171}
         m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
         m_MethodName: clickRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1055197171}
+        m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
+        m_MethodName: reproducirSonido
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4590,6 +4616,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 332556325}
+        m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
+        m_MethodName: reproducirSonido
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1003088978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4714,6 +4752,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1055197171}
         m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
         m_MethodName: clickMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1055197171}
+        m_TargetAssemblyTypeName: BotonesUI, Assembly-CSharp
+        m_MethodName: reproducirSonido
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4950,6 +5000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340f7ee27e4d46e439426c7bebe681f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonidoClick: {fileID: 0}
 --- !u!114 &1055197172
 MonoBehaviour:
   m_ObjectHideFlags: 0

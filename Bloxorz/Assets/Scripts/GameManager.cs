@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour{
     [Header("Menú de Pausa")]
     public GameObject panelMenuPausa; // El nuevo cartel visual de Pausa
     public bool isPaused = false;
+    [Header("Sonidos")]
+    public AudioClip sonidoVictoria; // 🔹 Aquí guardaremos el sonido de ganar
+    [Header("Música de Fondo")]
+    public AudioSource musicaFondo;
 
     void Start(){
         inicializoNivel();
@@ -62,6 +66,7 @@ public class GameManager : MonoBehaviour{
         instance.cronometro.pauso(); // Pausamos tu cronómetro manual
         panelMenuPausa.SetActive(true); // Mostramos el panel
         PlayerMovement.colaMovimientos.Clear(); // Limpiamos las teclas para que no se acumulen
+        if (instance.musicaFondo != null) instance.musicaFondo.Pause();
     }
 
     public void ReanudarJuego()
@@ -70,6 +75,7 @@ public class GameManager : MonoBehaviour{
         Time.timeScale = 1f; // 🔹 Descongela el universo
         instance.cronometro.reanudo();
         panelMenuPausa.SetActive(false); // Ocultamos el panel
+        if (instance.musicaFondo != null) instance.musicaFondo.UnPause();
     }
 
 
@@ -85,6 +91,10 @@ public class GameManager : MonoBehaviour{
             instance.cronometro = cronometro;
             instance.camara = this.camara;
             DontDestroyOnLoad(this); // El original se vuelve inmortal
+            if (instance.musicaFondo != null)
+            {
+                instance.musicaFondo.Play();
+            }
         }
         else
         {
@@ -138,6 +148,12 @@ public class GameManager : MonoBehaviour{
             SceneManager.LoadScene("Level "+nivel.ToString());
         }else{
             gameOver=true;
+            if (instance != null)
+            {
+                if (instance.musicaFondo != null) instance.musicaFondo.Stop();
+                Destroy(instance.gameObject);
+                instance = null;
+            }
             SceneManager.LoadScene("FinDelJuego");
         }
     }
@@ -216,6 +232,7 @@ public class GameManager : MonoBehaviour{
 
         if (instance != null)
         {
+            if (instance.musicaFondo != null) instance.musicaFondo.Stop();
             Destroy(instance.gameObject);
             instance = null;
         }
@@ -242,6 +259,10 @@ public class GameManager : MonoBehaviour{
                 if (player.GetComponent<PlayerMovement>().getIsParado() && player.GetComponent<PlayerMovement>().getEstaQuieto())
                 {
                     Debug.Log("GANASTE");
+                    if (sonidoVictoria != null && camara != null)
+                    {
+                        AudioSource.PlayClipAtPoint(sonidoVictoria, camara.transform.position);
+                    }
                     instance.StartCoroutine(moverCamaraFinal());
                 }
                 else
