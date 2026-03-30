@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour{
     [Header("Música de Fondo")]
     public AudioSource musicaFondo;
 
+
     void Start(){
         inicializoNivel();
     }
@@ -148,6 +149,11 @@ public class GameManager : MonoBehaviour{
             SceneManager.LoadScene("Level "+nivel.ToString());
         }else{
             gameOver=true;
+            if (instance != null && instance.cronometro != null) {
+                float tiempoFinal = instance.cronometro.getTiempoTranscurrido();
+                PlayerPrefs.SetFloat("TiempoFinalJuego", tiempoFinal);
+                PlayerPrefs.Save(); // Confirmamos el guardado
+            }
             if (instance != null)
             {
                 if (instance.musicaFondo != null) instance.musicaFondo.Stop();
@@ -259,9 +265,13 @@ public class GameManager : MonoBehaviour{
                 if (player.GetComponent<PlayerMovement>().getIsParado() && player.GetComponent<PlayerMovement>().getEstaQuieto())
                 {
                     Debug.Log("GANASTE");
-                    if (sonidoVictoria != null && camara != null)
+                    if (sonidoVictoria != null && player != null)
                     {
-                        AudioSource.PlayClipAtPoint(sonidoVictoria, camara.transform.position);
+                        AudioSource parlanteJugador = player.GetComponent<AudioSource>();
+                        if (parlanteJugador != null)
+                        {
+                            parlanteJugador.PlayOneShot(sonidoVictoria);
+                        }
                     }
                     instance.StartCoroutine(moverCamaraFinal());
                 }

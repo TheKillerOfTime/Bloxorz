@@ -23,26 +23,18 @@ public class MenuVictoriaController : MonoBehaviour
         jugadorDAO = new SQLiteJugadorDAO();
         recordDAO = new SQLiteRecordDAO();
 
-        // 1. Nos aseguramos de que el texto de error arranque apagado
         if (textoErrorNombre != null)
         {
             textoErrorNombre.gameObject.SetActive(false);
         }
 
-        // 2. MAGIA: Le decimos al InputField que si su texto cambia, ejecute "OcultarError"
         if (inputNombre != null)
         {
             inputNombre.onValueChanged.AddListener(delegate { OcultarError(); });
         }
 
-        if (GameManager.instance != null && GameManager.instance.cronometro != null)
-        {
-            tiempoFinalFloat = GameManager.instance.cronometro.getTiempoTranscurrido();
-        }
-        else
-        {
-            tiempoFinalFloat = 0f;
-        }
+        // 🔹 LA SOLUCIÓN: Leemos el tiempo guardado directamente, sin preguntar por el GameManager
+        tiempoFinalFloat = PlayerPrefs.GetFloat("TiempoFinalJuego", 0f);
 
         int horas = Mathf.FloorToInt(tiempoFinalFloat / 3600);
         int minutos = Mathf.FloorToInt((tiempoFinalFloat % 3600) / 60);
