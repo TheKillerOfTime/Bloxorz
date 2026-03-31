@@ -10,6 +10,10 @@ public class MenuVictoriaController : MonoBehaviour
     public TMP_InputField inputNombre;
     public TMP_Text textoErrorNombre; // <-- NUEVA VARIABLE PARA EL ERROR
 
+    public GameObject panelPopup;
+    public TMP_Text textoPopup;
+    private bool exitoAlGuardar = false; // Nos dirá si debemos ir al menú o quedarnos
+
     [Header("Configuración de Escenas")]
     public string nombreEscenaMenuPrincipal = "Main Menu";
     public string nombreEscenaNivel1 = "Level 1";
@@ -27,6 +31,7 @@ public class MenuVictoriaController : MonoBehaviour
         {
             textoErrorNombre.gameObject.SetActive(false);
         }
+        if (panelPopup != null) panelPopup.SetActive(false);
 
         if (inputNombre != null)
         {
@@ -42,6 +47,24 @@ public class MenuVictoriaController : MonoBehaviour
         int milisegundos = Mathf.FloorToInt((tiempoFinalFloat * 1000) % 1000);
 
         textoTiempoFinal.text = string.Format("Tiempo: {0:00}:{1:00}:{2:00}:{3:000}", horas, minutos, segundos, milisegundos);
+    }
+    public void MostrarPopup(string mensaje, bool fueExitoso)
+    {
+        exitoAlGuardar = fueExitoso;
+        if (textoPopup != null) textoPopup.text = mensaje;
+        if (panelPopup != null) panelPopup.SetActive(true);
+    }
+    public void ClickBotonCerrarPopup()
+    {
+        if (panelPopup != null) panelPopup.SetActive(false);
+
+        // Si se guardó bien, al cerrar el cartel nos vamos al menú principal
+        if (exitoAlGuardar)
+        {
+            LimpiarGameManager();
+            SceneManager.LoadScene(nombreEscenaMenuPrincipal);
+        }
+        // Si hubo error, simplemente se cierra el cartel y el jugador puede intentar de nuevo
     }
 
     // Esta función se llama sola cada vez que el jugador teclea una letra
@@ -78,17 +101,28 @@ public class MenuVictoriaController : MonoBehaviour
             return; // El "return" hace que el código se corte aquí y NO cambie de escena
         }
 
-        // Si hay nombre, guardamos normalmente
-        jugadorDAO.insertar(nombreIngresado);
-        int idJugador = jugadorDAO.obtenerIdPorNombre(nombreIngresado);
-
-        if (idJugador != -1)
+        try
         {
-            recordDAO.insertarPartida(idJugador, tiempoFinalFloat, DateTime.Now);
-        }
+            // Si hay nombre, guardamos normalmente
+            jugadorDAO.insertar(nombreIngresado);
+            int idJugador = jugadorDAO.obtenerIdPorNombre(nombreIngresado);
 
-        LimpiarGameManager();
-        SceneManager.LoadScene(nombreEscenaMenuPrincipal);
+            if (idJugador != -1)
+            {
+                recordDAO.insertarPartida(idJugador, tiempoFinalFloat, DateTime.Now);
+                MostrarPopup("¡Récord guardado exitosamente!", true);
+            }
+            else
+            {
+                // Si el ID falla, mostramos error
+                MostrarPopup("Error: No se pudo registrar el jugador.", false);
+            }
+        }
+        catch (Exception e)
+        {
+            // Si la base de datos falla (SQLite error), atrapamos el error aquí
+            MostrarPopup("Error de base de datos:\n" + e.Message, false);
+        }
     }
 
     // --- BOTÓN 2: JUGAR DE NUEVO SIN GUARDAR ---

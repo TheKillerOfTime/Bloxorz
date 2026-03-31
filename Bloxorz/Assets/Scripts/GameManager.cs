@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour{
     public Transform origenFinalCamara;
     public Transform finalCamara;
     private float duracion = 1f;
-    private const int nivelMax=3;
+    private const int nivelMax=4;
     [Header("Menú de Pausa")]
     public GameObject panelMenuPausa; // El nuevo cartel visual de Pausa
     public bool isPaused = false;
