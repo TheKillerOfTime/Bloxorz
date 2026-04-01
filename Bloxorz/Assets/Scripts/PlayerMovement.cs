@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour{
     [Header("Logica de la secuencia de movimientos")]
     public static List<string> colaMovimientos = new List<string>();
     private bool netxMove=true;
+    private bool terminoDeMoverse = true;
     private string move;
     [Header("Efectos de Sonido")]
     public AudioSource sfxMovimiento;
@@ -121,22 +122,30 @@ public class PlayerMovement : MonoBehaviour{
         }
     }
 
-    IEnumerator rotarEnUnTiempo(Vector3 punto, Vector3 eje, float anguloTotal, Vector3 posFinal, Vector3 rotFinal){
+    IEnumerator rotarEnUnTiempo(Vector3 punto, Vector3 eje, float anguloTotal, Vector3 posFinal, Vector3 rotFinal) {
         float anguloRotado = 0f;
-        while (anguloRotado < Mathf.Abs(anguloTotal)){
+        terminoDeMoverse = false;
+        while (anguloRotado < Mathf.Abs(anguloTotal)) {
             float anguloPaso = (Time.deltaTime / duracionRotacionPlayer) * Mathf.Abs(anguloTotal);
             transform.RotateAround(punto, eje, anguloPaso * Mathf.Sign(anguloTotal));
             anguloRotado += anguloPaso;
             yield return null;
         }
-        
-        correccionDeErrorRotacion(posFinal,rotFinal);
-        if (sfxMovimiento != null && sfxMovimiento.clip != null && !GameManager.gameOver)
+
+        correccionDeErrorRotacion(posFinal, rotFinal);
+        Physics.SyncTransforms();
+        terminoDeMoverse = true;
+        yield return null;
+        if (!GameManager.gameOver) { 
+            if (sfxMovimiento != null && sfxMovimiento.clip != null)
+            {
+                sfxMovimiento.Play();
+            }
+    }
+        else
         {
-            sfxMovimiento.Play();
-        }
-        if (GameManager.gameOver) {
             sonidoDerrota.Play();
+            
         }
         netxMove = true;
         if(colaMovimientos.Count==0){
@@ -155,7 +164,7 @@ public class PlayerMovement : MonoBehaviour{
 
     public bool getEstaQuieto()
     {
-        return netxMove; // Devuelve true si la animación terminó y está apoyado
+        return terminoDeMoverse; // Devuelve true si la animación terminó y está apoyado
     }
 
 }
