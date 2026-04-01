@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour{
     private string move;
     [Header("Efectos de Sonido")]
     public AudioSource sfxMovimiento;
+    public AudioSource sonidoDerrota;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -130,9 +131,12 @@ public class PlayerMovement : MonoBehaviour{
         }
         
         correccionDeErrorRotacion(posFinal,rotFinal);
-        if (sfxMovimiento != null && sfxMovimiento.clip != null)
+        if (sfxMovimiento != null && sfxMovimiento.clip != null && !GameManager.gameOver)
         {
             sfxMovimiento.Play();
+        }
+        if (GameManager.gameOver) {
+            sonidoDerrota.Play();
         }
         netxMove = true;
         if(colaMovimientos.Count==0){

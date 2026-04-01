@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour{
             SceneManager.LoadScene("Level "+nivel.ToString());
         }else{
             gameOver=true;
+            nivel = 1;
             if (instance != null && instance.cronometro != null) {
                 float tiempoFinal = instance.cronometro.getTiempoTranscurrido();
                 PlayerPrefs.SetFloat("TiempoFinalJuego", tiempoFinal);
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour{
             }
             if (instance != null)
             {
-                if (instance.musicaFondo != null) instance.musicaFondo.Stop();
+                if (instance.musicaFondo != null) instance.musicaFondo.Pause();
                 Destroy(instance.gameObject);
                 instance = null;
             }
@@ -228,7 +229,7 @@ public class GameManager : MonoBehaviour{
 
     public void restartGame()
     {
-        // 🔹 Restablecemos la variable global al primer nivel
+
         nivel = 1;
 
         // Forzamos a que el juego sepa que empezamos de cero
@@ -244,9 +245,12 @@ public class GameManager : MonoBehaviour{
         Time.timeScale = 1f; // 🔹 MUY IMPORTANTE: Descongelar el tiempo antes de salir
         isPaused = false;
 
+        nivel = 1;
+        gameOver = false;
+
         if (instance != null)
         {
-            if (instance.musicaFondo != null) instance.musicaFondo.Stop();
+            if (instance.musicaFondo != null) instance.musicaFondo.Pause();
             Destroy(instance.gameObject);
             instance = null;
         }
@@ -267,12 +271,14 @@ public class GameManager : MonoBehaviour{
                 panelJuego.SetActive(false);
                 gameOver = true;
                 instance.cronometro.resetTimer();
+
             }
             else
             {
                 if (player.GetComponent<PlayerMovement>().getIsParado() && player.GetComponent<PlayerMovement>().getEstaQuieto())
                 {
                     Debug.Log("GANASTE");
+                    PlayerMovement.colaMovimientos.Clear();
                     if (sonidoVictoria != null && player != null)
                     {
                         AudioSource parlanteJugador = player.GetComponent<AudioSource>();

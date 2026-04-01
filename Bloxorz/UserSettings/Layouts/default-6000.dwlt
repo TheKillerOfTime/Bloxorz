@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 114
+  controlID: 91
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -318,7 +318,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_MixersTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b0a80000
+    m_SelectedIDs: 
     m_LastClickedID: 43184
     m_ExpandedIDs: 12eb343c
     m_RenameOverlay:
@@ -512,7 +512,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -522,16 +522,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Usuarioo\Documents\Bloxorz\Bloxorz
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: 4eae0000
-    m_LastClickedID: 44622
-    m_ExpandedIDs: 00000000e2ad0000e4ad000000ca9a3bffffff7f
+    m_SelectedIDs: fcde0000
+    m_LastClickedID: 57084
+    m_ExpandedIDs: 00000000e8ad0000eaad000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -560,7 +560,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e2ad0000e4ad0000
+    m_ExpandedIDs: 00000000e8ad0000eaad0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,23 +706,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d65a0000
+      m_SelectedIDs: 44df0000
       m_LastClickedID: 0
-      m_ExpandedIDs: d08dffffe88dffff5090ffffee92ffffe897ffff3e9affffde9cffff7a9fffffca9fffff18fbffff08aa000026ab0000
+      m_ExpandedIDs: a8b8feffb6bcfeff1cc3feffc6c6feff62cafeff78cdfeff7cd1feff8cd4feffa8d7feffcaebfeff94effeffc0f6feff32fbfeffb440ffff2a79fffff87dffff8a97ffffc69affff1a9effffcaa3ffff9aa6ffffa6a9fffffcacffff78b0ffff18fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: MusicaSonido
-        m_OriginalName: MusicaSonido
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 43842
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}
