@@ -12,7 +12,7 @@ public interface IJugadorDAO
 public interface IRecordDAO
 {
     // Usamos DateTime para la fecha como me pediste corregir antes
-    void insertarPartida(int id_jugador, float tiempo, DateTime fecha);
+     void insertarPartida(int id_jugador, float tiempo, DateTime fecha);
 
     // Devuelve un IDataReader para leer los datos crudos de SQLite
     IDataReader obtenerRanking();

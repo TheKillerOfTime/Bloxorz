@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour{
     public Transform origenFinalCamara;
     public Transform finalCamara;
     private float duracion = 1f;
-    private const int nivelMax=4;
+    private const int nivelMax=5;
     [Header("Menú de Pausa")]
     public GameObject panelMenuPausa; // El nuevo cartel visual de Pausa
     public bool isPaused = false;
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour{
 
     private void inicializoNivel()
     {
+        PlayerMovement.colaMovimientos.Clear();
         camara = Camera.main;
         cronometro = new Cronometro(timeText, false);
         repintoNivelText();
@@ -96,14 +97,15 @@ public class GameManager : MonoBehaviour{
             {
                 instance.musicaFondo.Play();
             }
+            instance.StartCoroutine(instance.moverCamaraInicio());
         }
         else
         {
             pasarAtributos(this); // Le pasamos los datos frescos al inmortal
+            instance.StartCoroutine(instance.moverCamaraInicio());
             Destroy(gameObject);  // 🔹 ¡LA CLAVE! Destruimos este clon para que no estorbe
         }
 
-        instance.StartCoroutine(moverCamaraInicio());
     }
 
     private IEnumerator moverCamaraInicio(){
@@ -164,7 +166,8 @@ public class GameManager : MonoBehaviour{
         }
     }
 
-    private void pasarAtributos(GameManager gm){
+    private void pasarAtributos(GameManager gm)
+    {
         instance.flechasPosiciones = gm.flechasPosiciones;
         instance.nivelText = gm.nivelText;
         instance.timeText = gm.timeText;
@@ -176,6 +179,11 @@ public class GameManager : MonoBehaviour{
         instance.player = gm.player;
         instance.camara = gm.camara;
         instance.panelMenuPausa = gm.panelMenuPausa;
+
+        // 🔹 SOLUCIÓN: Pasarle al GameManager inmortal las coordenadas de la cámara del nuevo nivel
+        instance.origenCamara = gm.origenCamara;
+        instance.origenFinalCamara = gm.origenFinalCamara;
+        instance.finalCamara = gm.finalCamara;
     }
 
 

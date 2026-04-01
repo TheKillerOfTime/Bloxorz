@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RecordsMenuController : MonoBehaviour
 {
@@ -17,8 +19,13 @@ public class RecordsMenuController : MonoBehaviour
 
     private IRecordDAO recordDAO;
 
+    [Header("Sistema de Errores")]
+    public GameObject panelErrorPopup;
+    public TMP_Text textoMensajeError;
+
     void Start()
     {
+        if (panelErrorPopup != null) panelErrorPopup.SetActive(false);
         recordDAO = new SQLiteRecordDAO();
         Debug.Log("Ruta de la BDD: " + Application.persistentDataPath);
     }
@@ -43,40 +50,59 @@ public class RecordsMenuController : MonoBehaviour
 
     private void CargarDatos()
     {
-        // 1. Limpiamos la lista visual vieja
-        foreach (Transform hijo in contenedorLista) Destroy(hijo.gameObject);
-
-        IDataReader reader = recordDAO.obtenerRanking();
-
-        // 🔹 NUEVO: Creamos un contador para saber si encontramos algo
-        int cantidadRecords = 0;
-
-        while (reader.Read())
+        try
         {
-            cantidadRecords++; // Sumamos 1 por cada fila que exista
+            // 1. Limpiamos la lista visual vieja
+            foreach (Transform hijo in contenedorLista) Destroy(hijo.gameObject);
 
-            // Nota: Asumo que tu SELECT trae: 0=id, 1=nombre, 2=tiempo, 3=fecha.
-            // Si le quitaste el ID a tu SELECT, ajusta los números (0=nombre, 1=tiempo, 2=fecha)
-            string nombre = reader.GetString(1);
-            float tiempo = reader.GetFloat(2);
-            DateTime fecha = reader.GetDateTime(3);
+            IDataReader reader = recordDAO.obtenerRanking();
 
-            GameObject nuevaFila = Instantiate(prefabFilaRecord, contenedorLista, false);
-            nuevaFila.transform.localScale = Vector3.one;
-            nuevaFila.transform.localPosition = new Vector3(nuevaFila.transform.localPosition.x, nuevaFila.transform.localPosition.y, 0f);
+            // 🔹 NUEVO: Creamos un contador para saber si encontramos algo
+            int cantidadRecords = 0;
 
-            FilaRecordView scriptVista = nuevaFila.GetComponent<FilaRecordView>();
-            if (scriptVista != null)
+            while (reader.Read())
             {
-                // Como quitaste los botones, volvemos a la configuración simple
-                scriptVista.ConfigurarFila(nombre, tiempo, fecha);
+                cantidadRecords++; // Sumamos 1 por cada fila que exista
+
+                // Nota: Asumo que tu SELECT trae: 0=id, 1=nombre, 2=tiempo, 3=fecha.
+                // Si le quitaste el ID a tu SELECT, ajusta los números (0=nombre, 1=tiempo, 2=fecha)
+                string nombre = reader.GetString(1);
+                float tiempo = reader.GetFloat(2);
+                DateTime fecha = reader.GetDateTime(3);
+
+                GameObject nuevaFila = Instantiate(prefabFilaRecord, contenedorLista, false);
+                nuevaFila.transform.localScale = Vector3.one;
+                nuevaFila.transform.localPosition = new Vector3(nuevaFila.transform.localPosition.x, nuevaFila.transform.localPosition.y, 0f);
+
+                FilaRecordView scriptVista = nuevaFila.GetComponent<FilaRecordView>();
+                if (scriptVista != null)
+                {
+                    // Como quitaste los botones, volvemos a la configuración simple
+                    scriptVista.ConfigurarFila(nombre, tiempo, fecha);
+                }
+            }
+            reader.Close();
+
+            if (mensajeSinRecords != null)
+            {
+                mensajeSinRecords.SetActive(cantidadRecords == 0);
             }
         }
-        reader.Close();
-
-        if (mensajeSinRecords != null)
+        catch (Exception e)
         {
-            mensajeSinRecords.SetActive(cantidadRecords == 0);
+            // ¡Atrapamos el error!
+            MostrarError("Ocurrió un problema al leer la base de datos:\n" + e.Message);
         }
+    }
+    private void MostrarError(string mensaje)
+    {
+        if (textoMensajeError != null) textoMensajeError.text = mensaje;
+        panelErrorPopup.SetActive(true);
+    }
+    public void ClickVolverAlMenuPorError()
+    {
+        // Si la base de datos está rota, no hay nada que hacer en esta escena.
+        // Lo mejor es devolver al jugador al menú principal.
+        SceneManager.LoadScene("Main Menu");
     }
 }
