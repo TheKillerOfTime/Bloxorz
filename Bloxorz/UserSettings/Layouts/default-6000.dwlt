@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 116
+  controlID: 114
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 559
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -272,8 +272,8 @@ MonoBehaviour:
     y: 0
     width: 1072
     height: 547
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
@@ -302,9 +302,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 631
-    width: 1312
-    height: 355
+    y: 626
+    width: 1360
+    height: 360
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -318,8 +318,8 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_MixersTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: -32184
+    m_SelectedIDs: b0a80000
+    m_LastClickedID: 43184
     m_ExpandedIDs: 12eb343c
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -436,12 +436,12 @@ MonoBehaviour:
       oldMaxSizes: 
       oldSplitSize: 0
     m_HorizontalSplitter:
-      ID: 143
+      ID: 5793
       splitterInitialOffset: 0
       currentActiveSplitter: -1
       realSizes:
-      - 394
-      - 918
+      - 408
+      - 952
       relativeSizes:
       - 0.3
       - 0.7
@@ -451,7 +451,7 @@ MonoBehaviour:
       maxSizes:
       - 0
       - 0
-      lastTotalSize: 1312
+      lastTotalSize: 1360
       splitSize: 6
       xOffset: 0
       m_Version: 1
@@ -512,7 +512,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -522,16 +522,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Usuarioo\Documents\Bloxorz\Bloxorz
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: 2aae0000
-    m_LastClickedID: 44586
-    m_ExpandedIDs: 00000000c0ad0000c2ad000000ca9a3bffffff7f
+    m_SelectedIDs: 4eae0000
+    m_LastClickedID: 44622
+    m_ExpandedIDs: 00000000e2ad0000e4ad000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -560,7 +560,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c0ad0000c2ad0000
+    m_ExpandedIDs: 00000000e2ad0000e4ad0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -589,7 +589,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c623000004b00000f6aa000006ab0000b8df0000ec04010038ac000000000000
+    m_ExpandedInstanceIDs: c623000004b00000f6aa000006ab0000b8df0000ec04010038ac000000000000b0a80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,23 +706,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 70ae0000
+      m_SelectedIDs: d65a0000
       m_LastClickedID: 0
-      m_ExpandedIDs: c0cafcffc8cdfcff86ebfcff6aecfcfff6ecfcff40effcff9001fdfff614fdffca60fdff367ffdffb2abfdffccaefdff0021feff1824feff8c29feff5c2cfeff782ffeffb43ffeff2046feffce53feff14d2ffff40deffffb4e3ffff28e9ffff9eeeffff18fbffff04c0000038c00000967e0100b27e01000881010092810100ae8101004c9b0100d69b0100f29b01001e9c0100a89c0100c49c010000a0010070a0010096b00100b2b00100
+      m_ExpandedIDs: d08dffffe88dffff5090ffffee92ffffe897ffff3e9affffde9cffff7a9fffffca9fffff18fbffff08aa000026ab0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: MusicaSonido
+        m_OriginalName: MusicaSonido
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 43842
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}

@@ -23,8 +23,17 @@ public class AudioManager : MonoBehaviour
     // --- El Start y ToggleSettings siguen igual ---
     void Start()
     {
-        // Aseguramos que empiece con el icono correcto al iniciar
-        UpdateSpeakerIcon(masterSlider.value);
+        float savedMaster = PlayerPrefs.GetFloat("MasterVol", 1f);
+        float savedMusic = PlayerPrefs.GetFloat("MusicVol", 1f);
+        float savedSFX = PlayerPrefs.GetFloat("SFXVol", 1f);
+        masterSlider.value = savedMaster;
+        musicSlider.value = savedMusic;
+        sfxSlider.value = savedSFX;
+        SetMasterVolume(savedMaster);
+        SetMusicVolume(savedMusic);
+        SetSFXVolume(savedSFX);
+        UpdateSpeakerIcon(savedMaster);
+
     }
 
     public void ToggleSettings()
@@ -39,21 +48,27 @@ public class AudioManager : MonoBehaviour
     {
         float db = Mathf.Log10(sliderValue) * 20;
         mainMixer.SetFloat("MasterVolume", db);
-
-        // AQUÍ ESTÁ EL CAMBIO: Llamamos a la función que revisa el icono
+        PlayerPrefs.SetFloat("MasterVol", sliderValue);
+        PlayerPrefs.Save(); 
         UpdateSpeakerIcon(sliderValue);
     }
 
     public void SetMusicVolume(float sliderValue)
     {
         float db = Mathf.Log10(sliderValue) * 20;
+ 
         mainMixer.SetFloat("MusicVolume", db);
+        PlayerPrefs.SetFloat("MusicVol", sliderValue);
+        PlayerPrefs.Save();
     }
 
     public void SetSFXVolume(float sliderValue)
     {
         float db = Mathf.Log10(sliderValue) * 20;
         mainMixer.SetFloat("SFXVolume", db);
+
+        PlayerPrefs.SetFloat("SFXVol", sliderValue);
+        PlayerPrefs.Save();
     }
 
     // --- NUEVA FUNCIÓN PARA CAMBIAR EL ICONO ---
